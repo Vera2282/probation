@@ -1,0 +1,80 @@
+#include<iostream>
+#include<stdlib.h>
+#include<sys/wait.h>
+#include<ctime>
+
+using namespace std;
+
+int Shell(int arr[], int N)
+{
+	for(int gap = N/2; gap>0; gap/=2){
+		for(int i = gap; i<N; i++){
+			int temp = arr[i];
+			int(j = i; j>=gap && arr[j-gap} > temp; j-=gap){
+			  arr[j] = arr[j-gap];
+		}
+		arr[j] = temp;
+		}
+	  }
+  return 0;
+}
+
+int main(int argc, char* argv][])
+{
+  cout << "Im perent, PID =" <<getpid() <<endl;
+  int size = atoi(argv[1]);
+  int mas[size];
+  for(int i=0; i<size; i++){
+    mas[i] = rand()%100;
+}
+cout <<endl;
+  for(int i = 1; i<=3; i++){
+	if(fork() == 0){
+		if(i ==1){
+			clock_t t = clock();
+			cout <<"Bubble started" << endl;
+
+			int temp;
+			for (int j=0; j<size-1; j++){
+				for(int k = 0; k < size-j-1; k++){
+					if(mas[k] > mas[k+1]){
+						temp = mas[k];
+						mas[k] = mas[k+1];
+						mas[k+1] = temp;
+					}
+				}
+			}
+
+			t = clock() - t;
+			cout << endl << "Bubble ended in" << ((float)t)/CLOCKS_PER_SEC << endl;
+}
+	if(i==2){
+	  clock_t t = clock();
+	  cout <<"Intension started in" << ((float)t)/CLOCKS_PER_SEC << enal;
+	  for (int j = 1; j < size; j++){
+		int temp = mas[j];
+		int k = j-1;
+		while (k>=0 && temp <= mas[k]){
+		  mas[k+1] = mas[k];
+		  k = k-1;
+		}
+		mas[k+1] = temp;
+	}
+	t = clock() - t;
+	cout << endl <<"Intension ended in" << ((float)t)/CLOCKS_PER_SEC << endl;
+}
+	if(i ==3){
+		clock_t t = clock();
+		cout << "Shell started" << endl;
+		Shell(mas, size);
+t = clock() - t;
+cout << endl << "Shell ended in" << ((float)t/CLOCKS_PER_SEC << endl;
+}
+return 0;
+  }
+}
+	for(int i=1; i<3; i++){
+	  wait(0);
+	}
+return 0;
+}

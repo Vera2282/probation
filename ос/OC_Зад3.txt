@@ -1,0 +1,38 @@
+#include <iostream>
+#include<stdlib.h>
+#include<sys/types.h>
+#include<sys/stat.h>
+#include<pwd.h>
+#include<grp.h>
+#include<string.h>
+#include<time.h>
+
+using namespase std;
+
+int main(int argc, char*argv[]){
+	char filename[50];
+	strcpy(filename, argv[1]);
+
+	struct stat sb;
+	stat(filename, &sb);
+
+	struct passwd * pw;
+	pw = getpwuid(sb.st_uid);
+
+	struct group * gr;
+	gr = getgrgid(sb.st_gid);
+
+	if(S_ISREG(sb.st_mode)){
+		cout << endl <<"File" <<filename << "is a regular file" << endl;
+		}
+	if(S_ISDIR(sb.st_mode)){
+		cout << endl <<"File" <<filename << " is a directory" << endl;
+		}
+	cout << "Permitions = " << sb.st_mode << endl;
+	cout << "UID +" << sb.st_uid << "(" << pw -> pw_name << ")" << endl;
+	cout <<"GID = " << sb.st_gid << "(" gr -> gr_name << ")" << endl;
+
+	cout <<"File size = " << sb.st_size << "bytes" << endl << endl;
+
+	cout << "Access time = " << ctime(&sb.st_atime);
+	cout << "Modify time = " << ctime(&sb.st_mtime) << endl;

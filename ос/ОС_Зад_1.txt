@@ -1,0 +1,23 @@
+#include<iostream>
+#include<stdlib.h>
+#include<sys/wait.h>
+
+using namespace std;
+
+int main(int argc, char*argv[])
+{
+	cout << "I am parent, PID =" << getpid() << endl;
+	int s = atoi(argv[1]);
+	for(int i=1; i<=s; i++){
+		if(fork() == 0){
+			cout << "I am child started №" << i << "PID =" <<getpid() <<"PPID  = "getppid() << endl;
+			sleep(5);
+			cout << " I am child finished №" << i << "PID = " << getpid() << "PPID =" << getppid() << endl;
+			return 0;
+			}
+		}
+for(int i=1; i<=s; i++){
+	wait(0);
+	}
+return 0;
+}
